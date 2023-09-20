@@ -13,7 +13,7 @@ calc_L_q_r(K, m, prob_vec)
 
 \item{m}{:= number of restricted servers}
 
-\item{prob_vec}{:= state probability vector}
+\item{prob_vec}{:= state probability matrix}
 
 \item{n}{:= number of general servers}
 }

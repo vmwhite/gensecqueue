@@ -19,4 +19,5 @@ calc_p_B_r <- function(m,n,K,prob_vec){
       p_B_r<- p_B_r + p[i+1,j+1]
     }
   }
+  return(p_B_r)
 }

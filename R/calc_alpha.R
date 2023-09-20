@@ -3,7 +3,7 @@
 #' @param n := the number of general use servers
 #' @param prob_vec := state probability matrix
 #'
-#' @return p_B_r value
+#' @return probability there is a delay of a general customer when a restricted server is free
 #' @export
 #'
 #' @examples
@@ -17,4 +17,5 @@ calc_alpha <- function(m,n,prob_vec){
       alpha<- alpha + p[i+1,j+1]
     }
   }
+return(alpha)
 }

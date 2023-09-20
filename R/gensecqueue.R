@@ -56,11 +56,12 @@ gensecqueue <- function(lam,n,m, p, mu_g, mu_r){
       results <- append(results, alpha)
 
     ## Vehicle Utilization
-      rho <- lam /(m*mu_r + n*mu_g)
-      # general utlization
-      rho_g <- calc_rho_g()
+      # general utilization
+      rho_g <- calc_rho_g(K, p,prob_vec, n, m, p_B_R, p_B_G, mu_R, mu_G, lam_r, lam_g)
+      results <- append(results, rho_g)
       # restricted utilization
-      rho_r <- lam_r /(m*mu_r)
+      rho_r <- calc_rho_r( K, p, n, m, p_B_R, p_B_G, mu_R, mu_G, lam_r)
+      results <- append(results, rho_r)
 
   #add dummy results for invalid system
   }else{
@@ -79,7 +80,9 @@ gensecqueue <- function(lam,n,m, p, mu_g, mu_r){
   metrics <- append(metrics, "W_q_g" )
   metrics <- append(metrics, "p_B_r" )
   metrics <- append(metrics, "p_B_g" )
-  etrics <- append(metrics,  "alpha" )
+  metrics <- append(metrics,  "alpha" )
+  metrics <- append(metrics,  "rho_g" )
+  metrics <- append(metrics,  "rho_r" )
   colnames(DF) <- metrics
   return(DF)
 }
