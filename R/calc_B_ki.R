@@ -24,7 +24,7 @@
 #' mu_g <-.4
 #' mu_r <-.5
 #' Calc_Bmn(K,s,r,lambda,lambda_aux,lambda_p,mu_g,mu_r, p)
-Calc_Bmn <- function(K,s,r,lambda,lambda_aux,lambda_p,mu_g,mu_r, p){
+Calc_B_ki <- function(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p){
   q <- 1 - p
   # + 1 since r indexes at 1
   matrix_size <- (K) + 1

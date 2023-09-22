@@ -7,14 +7,14 @@
 #' @export
 #'
 #' @examples
-calc_alpha <- function(m,n,prob_vec){
+calc_alpha <- function(m,n,prob_vec,K){
   size <- length(prob_vec)
   alpha<- 0
 
   for (i in (0):(m)){
     for(j in (n):(K)){
       ## add one since R indexes at 1
-      alpha<- alpha + p[i+1,j+1]
+      alpha<- alpha + prob_vec[i+1,j+1]
     }
   }
 return(alpha)

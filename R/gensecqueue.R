@@ -52,7 +52,7 @@ gensecqueue <- function(lam,n,m, p, mu_g, mu_r){
       results <- append(results, p_B_g)
 
     ## Probability a general customer is delayed when a restricted server is available
-      alpha <- calc_alpha(m,n,prob_vec)
+      alpha <- calc_alpha(m,n,prob_vec,K)
       results <- append(results, alpha)
 
     ## Vehicle Utilization
