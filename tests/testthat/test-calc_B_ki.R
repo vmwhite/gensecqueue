@@ -21,25 +21,25 @@ test_that("Test B matrix calculations", {
                   0,0,0,0,0,lam)
                 , nrow = 6, ncol = 6, byrow = TRUE)
   B_10 = matrix(c(-(lam+(0*mu_R)),lam_G,0, 0, 0, 0,
-                  mu_G,-(lam +calc_mu(0,1)),lam_G,  0, 0, 0,
-                  0,2*mu_G,-(lam +calc_mu(0,2)),  lam_G, 0, 0,
-                  0,0, 2*mu_G,-(lam +calc_mu(0,2)),  lam_G, 0,
-                  0,0,0,2*mu_G,-(lam +calc_mu(0,2)),  lam_G,
-                  0,0,0,0,2*mu_G,-(lam +calc_mu(0,2)))
+                  mu_G,-(lam +calc_mu(0,1, mu_R,mu_G)),lam_G,  0, 0, 0,
+                  0,2*mu_G,-(lam +calc_mu(0,2, mu_R,mu_G)),  lam_G, 0, 0,
+                  0,0, 2*mu_G,-(lam +calc_mu(0,2, mu_R,mu_G)),  lam_G, 0,
+                  0,0,0,2*mu_G,-(lam +calc_mu(0,2, mu_R,mu_G)),  lam_G,
+                  0,0,0,0,2*mu_G,-(lam +calc_mu(0,2, mu_R,mu_G)))
                 , nrow = 6, ncol = 6, byrow = TRUE)
   B_11 = matrix(c(-(lam+(1*mu_R)),lam_G,0, 0, 0, 0,
-                  mu_G,-(lam +calc_mu(1,1)),lam_G,  0, 0, 0,
-                  0,2*mu_G,-(lam +calc_mu(1,2)),  lam_G, 0, 0,
-                  0,0, 2*mu_G,-(lam +calc_mu(1,2)),  lam_G, 0,
-                  0,0,0,2*mu_G,-(lam +calc_mu(1,2)),  lam_G,
-                  0,0,0,0,2*mu_G,-(lam +calc_mu(1,2)))
+                  mu_G,-(lam +calc_mu(1,1, mu_R,mu_G)),lam_G,  0, 0, 0,
+                  0,2*mu_G,-(lam +calc_mu(1,2, mu_R,mu_G)),  lam_G, 0, 0,
+                  0,0, 2*mu_G,-(lam +calc_mu(1,2, mu_R,mu_G)),  lam_G, 0,
+                  0,0,0,2*mu_G,-(lam +calc_mu(1,2, mu_R,mu_G)),  lam_G,
+                  0,0,0,0,2*mu_G,-(lam +calc_mu(1,2, mu_R,mu_G)))
                 , nrow = 6, ncol = 6, byrow = TRUE)
   B_12 = matrix(c(-(lam+(2*mu_R)),lam,0, 0, 0, 0,
-                  mu_G,-(lam +calc_mu(2,1)),lam,  0, 0, 0,
-                  0,2*mu_G,-(lam +calc_mu(2,2)),  0, 0, 0,
-                  0,0, 2*mu_G,-(lam +calc_mu(2,2)),  0, 0,
-                  0,0,0,2*mu_G,-(lam +calc_mu(2,2)),  0,
-                  0,0,0,0,2*mu_G,-(lam +calc_mu(2,2)))
+                  mu_G,-(lam +calc_mu(2,1, mu_R,mu_G)),lam,  0, 0, 0,
+                  0,2*mu_G,-(lam +calc_mu(2,2, mu_R,mu_G)),  0, 0, 0,
+                  0,0, 2*mu_G,-(lam +calc_mu(2,2, mu_R,mu_G)),  0, 0,
+                  0,0,0,2*mu_G,-(lam +calc_mu(2,2, mu_R,mu_G)),  0,
+                  0,0,0,0,2*mu_G,-(lam +calc_mu(2,2, mu_R,mu_G)))
                 , nrow = 6, ncol = 6, byrow = TRUE)
   B_21 = matrix(c(mu_R,0,0, 0, 0, 0,
                   0,mu_R,0,  0, 0, 0,
@@ -55,50 +55,50 @@ test_that("Test B matrix calculations", {
                      0,0,0,0, 2*mu_R, 0,
                      0,0,0,0, 0, 2*mu_R)
                 , nrow = 6, ncol = 6, byrow = TRUE)
-  B_23 = matrix(c(0,0,2*mu_R*p+2*mu_G, 0, 0, 0,
+  B_23 = matrix(c(0,0,0,0, 0, 0,
+                  0,0,0,0, 0, 0,
+                  0,0,2*mu_R*p+2*mu_G, 0, 0, 0,
                   0,0,0,  2*mu_R*p, 0, 0,
                   0,0,0,  0, 2*mu_R*p, 0,
-                  0,0,0,0, 0, 2*mu_R,
-                  0,0,0,0, 0, 0,
-                  0,0,0,0, 0, 0)
+                  0,0,0,0, 0, 2*mu_R)
                 , nrow = 6, ncol = 6, byrow = TRUE)
-  B_33 = matrix(c(0,0,0, 2*mu_R*q, 0, 0,
+  B_33 = matrix(c(0,0,0,0, 0, 0,
+                  0,0,0,0, 0, 0,
+                  0,0,0, 2*mu_R*q, 0, 0,
                   0,0,0, 0, 2*mu_R*q,  0,
                   0,0,0,  0, 0, 2*mu_R*q,
-                  0,0,0,0, 0, 0,
-                  0,0,0,0, 0, 0,
                   0,0,0,0, 0, 0)
                 , nrow = 6, ncol = 6, byrow = TRUE)
-  B_34 = matrix(c(0,0,0, 2*mu_R*calc_alpha_k(1,p,q), 0, 0,
+  B_34 = matrix(c(0,0,0,0, 0, 0,
+                  0,0,0,0, 0, 0,
+                  0,0,0, 2*mu_R*calc_alpha_k(1,p,q), 0, 0,
                   0,0,0,  0, 2*mu_R*calc_alpha_k(1,p,q), 0,
                   0,0,0,  0, 0, 2*mu_R*q,
-                  0,0,0,0, 0, 0,
-                  0,0,0,0, 0, 0,
                   0,0,0,0, 0, 0)
                 , nrow = 6, ncol = 6, byrow = TRUE)
-  B_44 = matrix(c(0,0,0,0, 2*mu_R*(q^2), 0,
+  B_44 = matrix(c(0,0,0,0, 0, 0,
+                  0,0,0,0, 0, 0,
+                  0,0,0,0, 2*mu_R*(q^2), 0,
                   0,0,0, 0,0, 2*mu_R*(q^2),
                   0,0,0,  0,0, 0,
-                  0,0,0,0, 0, 0,
-                  0,0,0,0, 0, 0,
                   0,0,0,0, 0, 0)
                 , nrow = 6, ncol = 6, byrow = TRUE)
-  B_45 = matrix(c(0,0,0, 0, 2*mu_R*calc_alpha_k(2,p,q), 0,
-                  0,0,0,  0, 0, 2*mu_R^2,
+  B_45 = matrix(c(0,0,0,0, 0, 0,
+                  0,0,0,0, 0, 0,
+                  0,0,0, 0, 2*mu_R*calc_alpha_k(2,p,q), 0,
+                  0,0,0,  0, 0, 2*mu_R*(q^2),
                   0,0,0,  0, 0, 0,
-                  0,0,0,0, 0, 0,
-                  0,0,0,0, 0, 0,
                   0,0,0,0, 0, 0)
                 , nrow = 6, ncol = 6, byrow = TRUE)
-  B_55 = matrix(c(0,0,0, 0, 0, 2*mu_R*(q^3),
+  B_55 = matrix(c(0,0,0,0, 0, 0,
+                  0,0,0,0, 0, 0,
+                  0,0,0, 0, 0, 2*mu_R*(q^3),
                   0,0,0,  0, 0, 0,
                   0,0,0,  0,0, 0,
-                  0,0,0,0, 0,0,
-                  0,0,0,0, 0, 0,
-                  0,0,0,0, 0, 0)
+                  0,0,0,0, 0,0)
                 , nrow = 6, ncol = 6, byrow = TRUE)
 
-  B <- calc_B(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p)
+  B <- Calc_B_ki(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p)
 
 #Check values -- Note: R indexes at 1
   expect_equal(B[1,1,,], B_00)
