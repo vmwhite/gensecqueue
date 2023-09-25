@@ -1,8 +1,8 @@
-test_that("Test B calcs", {
+test_that("Test B matrix calculations", {
   ## test params
   K <- 5
   m <- 2
-  n <- 3
+  n <- 2
   q <- .2
   lam <- 1
   mu_R <- 5
@@ -98,19 +98,19 @@ test_that("Test B calcs", {
                   0,0,0,0, 0, 0)
                 , nrow = 6, ncol = 6, byrow = TRUE)
 
-  B_ki <- calc_B_ki(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p)
+  B <- calc_B(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p)
 
 #Check values -- Note: R indexes at 1
-  expect_equal(B_ki[1,1,,], B_00)
-  expect_equal(B_ki[2,1,,], B_10)
-  expect_equal(B_ki[2,2,,], B_11)
-  expect_equal(B_ki[2,3,,], B_12)
-  expect_equal(B_ki[3,2,,], B_21)
-  expect_equal(B_ki[3,3,,], B_22)
-  expect_equal(B_ki[3,4,,], B_23)
-  expect_equal(B_ki[4,4,,], B_33)
-  expect_equal(B_ki[4,5,,], B_34)
-  expect_equal(B_ki[5,5,,], B_44)
-  expect_equal(B_ki[5,6,,], B_45)
-  expect_equal(B_ki[6,6,,], B_55)
+  expect_equal(B[1,1,,], B_00)
+  expect_equal(B[2,1,,], B_10)
+  expect_equal(B[2,2,,], B_11)
+  expect_equal(B[2,3,,], B_12)
+  expect_equal(B[3,2,,], B_21)
+  expect_equal(B[3,3,,], B_22)
+  expect_equal(B[3,4,,], B_23)
+  expect_equal(B[4,4,,], B_33)
+  expect_equal(B[4,5,,], B_34)
+  expect_equal(B[5,5,,], B_44)
+  expect_equal(B[5,6,,], B_45)
+  expect_equal(B[6,6,,], B_55)
 })
