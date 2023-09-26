@@ -97,10 +97,10 @@ Calc_B_ki <- function(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p){
               for (kay in 1:((i-1)-m)){
                 if ( ii_two == i- kay - 1){
                   # if R in queue
-                  if(kay < ((i - 1)-m) && (j+kay) <= K+1){
+                  if(kay < ((i - 1)-m) && (j-1+kay) < K){
                    B[k,i,j,j+kay] = m*mu_R*(q^kay)*p
                   # if no R in queue
-                  }else if (kay == ((i-1) - m) && (j+kay) <= K+1){
+                  }else if (kay == ((i-1) - m) || (j-1+kay) == K){
                    B[k,i,j,j+kay] = (m)*mu_R*q^kay
                   }
                 }
@@ -123,9 +123,9 @@ Calc_B_ki <- function(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p){
                if (ii_two == i- kay - 1) {
                   if( kay < (i-1)-m && (j+ kay) <= K ){
                    B[k,i,j,j+kay] = (m)*mu_R*q^kay*p
-                  }else if ( kay == (i-1)-m && (j + kay) <= K){
+                  }else if ( (kay == (i-1)-m && (j-1 + kay) <= K  )|| (j-1 + kay) == K){
                    B[k,i,j,j+kay] =  (m)*mu_R*q^kay
-                  }else if((j+kay) - K == 1){
+                  }else if((j-1+kay) - K == 0){
                     ## type change
                     B[k,i,j,K+1] =  (m)*mu_R*q^kay
                   }

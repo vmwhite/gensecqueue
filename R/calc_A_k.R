@@ -30,7 +30,7 @@ calc_A_k <- function(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p){
   k_amax <- max((K-n+2)+1,n+1)
   A_k <- matrix(0, nrow=matrix_size, ncol=matrix_size)
   A <- array(c(A_k), c(k_amax, matrix_size, matrix_size))
-  for (i in 1:matrix_size){
+  for (i in matrix_size:2*matrix_size){
     for (k in 1:k_amax){
       ii_two <- ((i-1) - (k -1)+ 1) + 1
       for (j in 1:matrix_size){
@@ -59,10 +59,10 @@ calc_A_k <- function(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p){
             for (kay in 1:((i-1)-m)){
               if ( ii_two == i- kay - 1){
                 # if R in queue
-                if(kay < ((i - 1)-m) && (j+kay) <= K+1){
+                if(kay < ((i - 1)-m) && (j-1+kay) < K){
                   A[k,j,j+kay] = m*mu_R*(q^kay)*p
                   # if no R in queue
-                }else if (kay == ((i-1) - m) && (j+kay) <= K+1){
+                }else if (kay == ((i-1) - m) || (j-1+kay) == K){
                   A[k,j,j+kay] = (m)*mu_R*q^kay
                 }
               }
@@ -87,7 +87,7 @@ calc_A_k <- function(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p){
                   A[k,j,j+kay] = (m)*mu_R*q^kay*p
                 }else if ( kay == (i-1)-m && (j + kay) <= K){
                   A[k,j,j+kay] =  (m)*mu_R*q^kay
-                }else if((j+kay) - K == 1){
+                }else if((j-1+kay) - K == 0){
                   ## type change
                   A[k,j,K+1] =  (m)*mu_R*q^kay
                 }
