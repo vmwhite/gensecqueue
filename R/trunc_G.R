@@ -46,55 +46,31 @@ trunc_G <- function(K,n,m, A,B,R) {
   A_count <- 0
   for (col in 1:(m+1)){
     r_row_sum <- 0
-    ## first summation
-    if (col == (m-n-1)+1){
-      if (K-2*n > 0){
-        for (i in 0:(K-2*n)){
-          r_row_sum <- r_row_sum + (matrix_power(R,i) %*% B[(n+i+2)+1,(m+i)+1,,])
+    ## X summation
+    if (col == (m-1)+1){
+      i <- 1
+      r_row_sum <- B[col+1,col+1,,]
+      while (i <= (K-n)){
+          r_row_sum <- r_row_sum + (matrix_power(R,i) %*% B[(i+2)+1,(m+i)+1,,])
+          i <- i +1
         }
-      }else if (K-2*n == 0){
-        r_row_sum <- r_row_sum + (matrix_power(R,0) %*% B[(n+0+2)+1,(m+0)+1,,])
+      ## Y summation
+    }else if(col == (m)+1){
+      i <- 1
+      r_row_sum <- B[col-1,col,,]
+      while (i <= (K-n)){
+        r_row_sum <- r_row_sum + (matrix_power(R,i) %*% B[(i+1)+1,(m+i)+1,,])
+        i <- i +1
       }
-      ## last summation
-    }else if(col == (m)+1 && (K-n+2-1) >= 0){
-      for (i in 0:(K-n+2-1)){
-        r_row_sum <- r_row_sum + (matrix_power(R,i) %*% A[(i+1)+1,,])
+      r_row_sum <- r_row_sum + (matrix_power(R,K-n+1) %*% A[(K-n+2)+1,,])
+      ### Z summation - As written in text ####
+    }else if (col == ((m+1) +1)){
+      i <- 1
+      r_row_sum <- 0 # A[(0)+1,,]
+      while (i <= (K-n+2)){
+        r_row_sum <- r_row_sum + (matrix_power(R,i-1) %*% A[(i)+1,,])
+        i <- i +1
       }
-      ### (r-s-1) + 1 to (r) + 1 summation ####
-    }else if (col < ((m) +1) && (col>((m-n-1)+1) )){
-      ## sum of the B's
-      B_count <- max(K-n+1 + 1 - A_count, 2+1)
-      if (B_count == 3){
-        if (K-2*n == 0){
-          r_row_sum <- r_row_sum + (matrix_power(R,0) %*% B[2+1,(m+0)+1,,])
-        }else if (K-2*n > 0){
-          for (i in 0:(K-2*n)){
-            r_row_sum <- r_row_sum + (matrix_power(R,i) %*% B[2+1,(m+i)+1,,])
-          }
-        }
-      }else{
-        if (K-2*n == 0){
-          r_row_sum <- r_row_sum + (matrix_power(R,0) %*% B[(n+0+1)+1,(m+0)+1,,])
-        }else if (K-2*n > 0){
-          for (i in 0:(K-2*n)){
-            r_row_sum <- r_row_sum + (matrix_power(R,i) %*% B[(n+i+1)+1,(m+i)+1,,])
-          }
-        }
-      }
-      ## sum the A's
-      max <- (K-n-m)
-      if (((K-n-m) <= (K-2*n +1)) && A_count == 0 && (K-n+2) >= 0 ){
-        r_row_sum <- r_row_sum + (matrix_power(R,(K-2*n+1)) %*% A[(K-n+2)+1,,])
-      }else if ((A_count) == 0 && (K-n+2) >= 0){
-        r_row_sum <- r_row_sum + (matrix_power(R,(K-2*n+1)) %*% A[(K-n+2)+1,,])
-      }else if ((K-n+2) >= 0){
-        for (i in (K-2*n +1):(K-2*n +1 + A_count)){
-          if (i <= K-n-m){
-            r_row_sum <- r_row_sum + (matrix_power(R,i) %*% A[(m+i +2)+1,,])
-          }
-        }
-      }
-      A_count <- A_count + 1
     }
     a_irow_icol_jrow_jcol[row,col,,] <- r_row_sum
   }
