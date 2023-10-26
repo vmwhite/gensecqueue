@@ -26,6 +26,13 @@ gensecqueue <- function(lam,n,m, p, mu_g, mu_r){
     ## intermediate calculations
     lam_g <- lam*(1-p)
     lam_r <- lam*p
+
+    ## Find Transition Probability Matrix
+    A<- calc_A_k(K,m,n,lam,lam_r, lam_g, mu_g, p)
+    B<- Calc_B_ki(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
+    R <- calc_R(A,K,n)
+    prob_vec <- calc_X(K,m,n,A,B,R)
+
     ## Length of queues
       #steady-state number of customers in the "restricted queue"
       L_q_r <- calc_L_q_r(K,m,prob_vec)

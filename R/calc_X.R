@@ -27,57 +27,21 @@
 Calc_X <- function(K,m,n, A,B,R){
   #Calculate the truncated m by m Generator matrix
   G <- trunc_G(K,m,n, A,B,R)
+  #Add in total probability equation
+  G <-last_row_G(G, K, R,m)
 
-  ## append final equation
-  #x_0*e + x_1*e +.. x_r(I-R)^{-1}*e = 1
-  # e is the column vector with all its components equal to 1
-  e <- matrix(1, nrow = r, ncol=1)
+  #RHS
   matrix_size <- K + 1
-  I <- diag(1,matrix_size)
-  # dummy x variable
-  X_r <- matrix(1, nrow = 1, ncol=matrix_size)
-  ##  Add in final equation as a new row in G
-  row_list <- c()
-  I <- diag(1,matrix_size)
-  a_Xr <- X_r %*% t(solve(I - R)) # transpose so that the variable are aligned
-  for (i in 1:((r + 1) * matrix_size)){
-    if (i <(((r * matrix_size)+1))){
-      row_list<- append(row_list, 1)
-      num <- 1
-    }else{
-      row_list<- append(row_list, a_Xr[num])
-      num <- num+1
-    }
-  }
-
-  G <- rbind(G,row_list)
   b <- matrix(0, nrow=((r+1)*matrix_size),ncol=1)
   b <- rbind(b,1)
 
-  # Solve overdefined system
-
-  t <- try(X <- qr.solve(G,b))
-  if("try-error" %in% class(t)){
-    print(paste0("Using lsfit for solving for probaility transition matrix instead"))
-    #X <- ginv(G) %*% b ## takes longer
-    X <- lsfit(G, b)
-    X <- X$coefficients
-    # remove first intercept coefficent
-    X <- X[-1]
-  }
+  # Solve over-defined system
+  X <- solve_prob_matrix(G,b)
 
   # add additional rows to X
   X <- normalize_vector(X,matrix_size,R)
 
   ## reformat to x_ij
-  X_i <- matrix(0, nrow = max(length(X), nrow(X))/matrix_size, ncol=matrix_size) #depending on solution method use nrow or length
-  count <- 1
-  for (i in 1:(max(length(X), nrow(X))/matrix_size)){
-    for(j in 1:matrix_size){
-      X_i[i,j] <- X[count]
-      count <- count+1
-    }
-  }
-  X_i[is.na(X_i)] <- 0
+  x_i <- reformat_x(X, matrix_size)
   return(X_i)
 }

@@ -4,7 +4,7 @@
 \alias{calc_alpha}
 \title{Calculate the probability a type G customer is delayed while a restricted server is free}
 \usage{
-calc_alpha(m, n, prob_vec)
+calc_alpha(m, n, prob_vec, K)
 }
 \arguments{
 \item{m}{:= number of restricted servers}

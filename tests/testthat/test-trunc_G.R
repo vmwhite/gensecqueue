@@ -22,7 +22,6 @@ test_that("Check Valid G trunc matrix", {
   ## put into form of G
   aij <- matrix(0, nrow=1,ncol=matrix_size)
   G_T <- matrix(0, nrow = ((m + 1)*matrix_size), ncol = ((m + 1)*matrix_size ))
-  G_test <- array(c(aij), c(m+1, m+1, matrix_size, matrix_size))
   zero_matrix = matrix(c(0,0,0,0, 0, 0,
                          0,0,0,0, 0, 0,
                          0,0,0, 0, 0, 0,
@@ -40,6 +39,12 @@ test_that("Check Valid G trunc matrix", {
   G_col_3 <- do.call(rbind, list(zero_matrix, B[1,2,,], B[2,3,,] + Y))
   G_T <- do.call(cbind, list(   G_col_1 ,   G_col_2 ,   G_col_3  ))
 
+  ## Check G
+  G <- trunc_G(K,n,m, A,B,R)
+  expect_equal(G_T, G)
+
+  ## Check G
+  G_test <- array(c(aij), c(m+1, m+1, matrix_size, matrix_size))
   G_test[1,1,,] <- B[2,1,,]
   G_test[1,2,,] <- B[1,1,,]
 
@@ -52,9 +57,8 @@ test_that("Check Valid G trunc matrix", {
   G_test[3,3,,] <- B[2,3,,] + Y
 
   G_test <-cbind(G_test)
+  expect_equal(G_test, G)
 
 
-  ## Check G
-  G <- trunc_G(K,n,m, A,B,R)
-  expect_equal(G_T, G)
+
 })
