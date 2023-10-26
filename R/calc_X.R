@@ -27,8 +27,10 @@
 Calc_X <- function(K,m,n, A,B,R){
   #Calculate the truncated m by m Generator matrix
   G <- trunc_G(K,m,n, A,B,R)
+  #transpose G to turn into a system of equations
+  G_trans <- t(G)
   #Add in total probability equation
-  G <-last_row_G(G, K, R,m)
+  G_trans <-last_row_G(G_trans, K, R,m)
 
   #RHS
   matrix_size <- K + 1
@@ -36,7 +38,7 @@ Calc_X <- function(K,m,n, A,B,R){
   b <- rbind(b,1)
 
   # Solve over-defined system
-  X <- solve_prob_matrix(G,b)
+  X <- solve_prob_matrix(G_trans,b)
 
   # add additional rows to X
   X <- normalize_vector(X,matrix_size,R)

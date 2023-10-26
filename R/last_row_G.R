@@ -39,8 +39,10 @@ last_row_G <- function(G, K, R, m){
     }
   }
 
-  G <- rbind(G,row_list)
+  G_new <- rbind(G,row_list)
+  colnames(G_new) <- NULL
+  rownames(G_new) <- NULL
+  dimnames(G_new) <- NULL
 
-
-  return(new_G)
+  return(G_new)
 }

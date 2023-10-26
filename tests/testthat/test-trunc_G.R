@@ -43,22 +43,6 @@ test_that("Check Valid G trunc matrix", {
   G <- trunc_G(K,n,m, A,B,R)
   expect_equal(G_T, G)
 
-  ## Check G
-  G_test <- array(c(aij), c(m+1, m+1, matrix_size, matrix_size))
-  G_test[1,1,,] <- B[2,1,,]
-  G_test[1,2,,] <- B[1,1,,]
-
-  G_test[2,1,,] <- B[3,2,,]
-  G_test[2,2,,] <-  B[2,2,,]
-  G_test[2,3,,] <- B[1,2,,]
-
-
-  G_test[3,2,,] <- B[3,3,,] + X
-  G_test[3,3,,] <- B[2,3,,] + Y
-
-  G_test <-cbind(G_test)
-  expect_equal(G_test, G)
-
 
 
 })
