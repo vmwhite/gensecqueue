@@ -9,7 +9,6 @@
 #' @examples
 #'
 reformat_X <- function(X, matrix_size){
-  X_i <- x_ij()
   X_i <- matrix(0, nrow = max(length(X), nrow(X))/matrix_size, ncol=matrix_size) #depending on solution method use nrow or length
   count <- 1
   for (i in 1:(max(length(X), nrow(X))/matrix_size)){

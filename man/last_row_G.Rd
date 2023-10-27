@@ -15,6 +15,9 @@ last_row_G(G, K, R, m)
 
 \item{m}{:= number of servers}
 }
+\value{
+appended truncated generator matrix
+}
 \description{
 Append last row to truncated G matrix
 }

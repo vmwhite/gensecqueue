@@ -12,14 +12,20 @@
 #' m <- 2
 #' prob_vec <- []
 #' calc_L_q_r(K,m,prob_vec)
-calc_L_q_r <- function(K,m,prob_vec){
-  size <- length(prob_vec)
+calc_L_q_r <- function(K,m,n,prob_vec){
+  matrix_size <- K+1
+  size <- length(prob_vec) / matrix_size
   L_q_r <- 0
-  for(i in (m+1):(size-1)){
-    for(j in (n):(K)){
-      #add one to for loops since R indexes at one
-      val <- (i - m)*p[i+1,j+1]
-      L_q_r <-  L_q_r + val
+
+  if (m+1+1 > (size)){
+    L_q_r <- 0
+  }else{
+    for(i in (m+1+1):(size)){
+      for(j in (n+1):(K+1)){
+        #add one to for loops since R indexes at one
+        val <- ((i-1) - m)*prob_vec[i,j]
+        L_q_r <-  L_q_r + val
+      }
     }
   }
 return(L_q_r)

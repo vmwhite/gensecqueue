@@ -24,7 +24,7 @@
 #' m <- Calc_R(A, K,s)
 #' B <-  Calc_Bmn(K,s,r,lambda,lambda_aux,lambda_p,mu_p,mu_aux, p)
 #' X_i <- Calc_X(K,s,r, A,B,R)
-Calc_X <- function(K,m,n, A,B,R){
+calc_X <- function(K,m,n, A,B,R, tolerance = 0.000001){
   #Calculate the truncated m by m Generator matrix
   G <- trunc_G(K,m,n, A,B,R)
   #transpose G to turn into a system of equations
@@ -34,16 +34,16 @@ Calc_X <- function(K,m,n, A,B,R){
 
   #RHS
   matrix_size <- K + 1
-  b <- matrix(0, nrow=((r+1)*matrix_size),ncol=1)
+  b <- matrix(0, nrow=((m+1)*matrix_size),ncol=1)
   b <- rbind(b,1)
 
   # Solve over-defined system
   X <- solve_prob_matrix(G_trans,b)
 
   # add additional rows to X
-  X <- normalize_vector(X,matrix_size,R)
+  X <- normalize_vector(X,matrix_size,R, tolerance)
 
   ## reformat to x_ij
-  x_i <- reformat_x(X, matrix_size)
+  X_i <- reformat_X(X, matrix_size)
   return(X_i)
 }
