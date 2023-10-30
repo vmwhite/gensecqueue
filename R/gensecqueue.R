@@ -29,7 +29,7 @@ gensecqueue <- function(lam,n,m, p, mu_g, mu_r){
 
     ## Find Transition Probability Matrix
     tolerance = 0.000001
-    A<- calc_A_k(K,m,n,lam,lam_r, lam_g, mu_g, p)
+    A<- calc_A_k(K,m,n,lam,lam_r,lam_g,mu_r,mu_g, p)
     B<- Calc_B_ki(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
     R <- calc_R(A,K,n)
     prob_vec <- calc_X(K,m,n,A,B,R, tolerance)
@@ -65,10 +65,10 @@ gensecqueue <- function(lam,n,m, p, mu_g, mu_r){
 
     ## Vehicle Utilization
       # general utilization
-      rho_g <- calc_rho_g(K, p,prob_vec, n, m, p_B_R, p_B_G, mu_R, mu_G, lam_r, lam_g)
+      rho_g <- calc_rho_g( K, p, n, m, p_B_r, p_B_g, mu_r, mu_g, lam_r, lam_g, prob_vec)
       results <- append(results, rho_g)
       # restricted utilization
-      rho_r <- calc_rho_r( K, p, n, m, p_B_R, p_B_G, mu_R, mu_G, lam_r)
+      rho_r <- calc_rho_r( K, p, n, m, p_B_r, p_B_g, mu_r, mu_g, lam_r, prob_vec)
       results <- append(results, rho_r)
 
   #add dummy results for invalid system

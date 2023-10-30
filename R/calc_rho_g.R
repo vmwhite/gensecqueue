@@ -13,28 +13,32 @@
 #' @export
 #'
 #' @examples
-calc_rho_g <- function( K, p, X, n, m, p_B_R, p_B_G, mu_R, mu_G, lam_r, lam_g){
+calc_rho_g <- function( K, p, n, m, p_B_R, p_B_G, mu_R, mu_G, lam_r, lam_g, prob_vec){
     rho_g <- 0
     #service of all general customers
     rho_g <- lam_g / (n*mu_G)
     #probability service of restricted calls when at least one G server is free and no R server is free
-    p_1 <- (1-p_B_G)*p_B_R
+    rho_g <- rho_g + ((lam_r*(1-p_B_G)*p_B_R) / (n*mu_G))
+
     #probability when there is a restricted queue and all servers are busy
-    p_2 <- (p_B_R *p_B_G)
+    p_1 <- (p_B_R *p_B_G)
     # probability R finishes before G
     R_fin <- (n*mu_G) / (m*mu_R + n*mu_G)
     # probability G finishes before R
     G_fin<- (m*mu_R) / (m*mu_R + n*mu_G)
-    #summation in ith spot in queue and R finishes before ith general servers
-    p_3 <- (1-p)^(K+1)
-    for(i in 1:(K)){
-      p_3 <- p_3 + (((1-p)^(i-1))*p*(G_fin^(i)))
+    #summation in ith spot in queue and R finishes before ith general servers.max restricted queue length is K-n
+    p_2 <- 0
+    matrix_size <- K+1
+    size <- (length(prob_vec)/matrix_size) - (m+1)
+    if (size > 0 ){
+    for(i in 1:size){
+      for(j in 1:matrix_size){
+        prob_length <- prob_vec[i+m+1,j]
+      }
     }
-    p_4 <- 0
-    for (j in (n:len(X))){
-      p_4 <- p_4 + X[k,j]
+   p_2 <- p_2 + (prob_length*(G_fin^(i)))
     }
   #summing it all together
-    rho_g <- rho_g + ((lam_r*(p_1 + p_2*p_3+ p_4)) /  (n*mu_G))
+    rho_g <- rho_g + ((lam_r*(p_1*p_2)) /  (n*mu_G))
   return (rho_g)
 }
