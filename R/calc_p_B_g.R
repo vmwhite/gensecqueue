@@ -9,13 +9,14 @@
 #'
 #' @examples
 calc_p_B_g <- function(K,n,prob_vec){
-  size <- length(prob_vec)
+  matrix_size <- K + 1
+  size <- length(prob_vec) / matrix_size
   p_B_g<- 0
 
   for (i in (0):(size-1)){
     for(j in (n):(K)){
       #add one since R indexes at 1
-      p_B_g<- p_B_g + p[i+1,j+1]
+      p_B_g<- p_B_g + prob_vec[i+1,j+1]
     }
   }
   return(p_B_g)

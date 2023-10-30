@@ -8,11 +8,12 @@
 #'
 #' @examples
 calc_alpha <- function(m,n,prob_vec,K){
-  size <- length(prob_vec)
+  matrix_size <- K +1
+  size <- length(prob_vec) / matrix_size
   alpha<- 0
 
-  for (i in (0):(m)){
-    for(j in (n):(K)){
+  for (i in (0):(m-1)){
+    for(j in (n+1):(K)){
       ## add one since R indexes at 1
       alpha<- alpha + prob_vec[i+1,j+1]
     }
