@@ -20,9 +20,9 @@
 #' lambda_p <- p * lambda
 #' mu_p <-.4
 #' mu_aux <-.5
-#' A <- Calc_Am(K,s,r,lambda,lambda_aux,lambda_p,mu_p,mu_aux, p)
+#' A <- Calc_A_k(K,s,r,lambda,lambda_aux,lambda_p,mu_p,mu_aux, p)
 #' R <- Calc_R(A, K,s)
-#' B <-  Calc_Bmn(K,s,r,lambda,lambda_aux,lambda_p,mu_p,mu_aux, p)
+#' B <-  Calc_B_ki(K,s,r,lambda,lambda_aux,lambda_p,mu_p,mu_aux, p)
 #' trunc_G(K,s,r, A,B,R)
 trunc_G <- function(K,n,m, A,B,R) {
   #Calculate the truncated r by r Generator matrix as a_irow_icol_jrow_jcol
@@ -32,10 +32,10 @@ trunc_G <- function(K,n,m, A,B,R) {
   inner_col2 <- 0
   A_count <- 0
 
-  for(i in (0:m-1)){
+  for(i in (0:(m-1))){
     for (j in (0:m)){
       k <- i - j + 1
-      if (m >= 0 && k >= 0){
+      if (m >= 0 && k >= 0  ){
         a_irow_icol_jrow_jcol[i+1,j+1,,] <- B[k+1,i+1,,]
       }
     }

@@ -26,7 +26,7 @@
 #' X_i <- Calc_X(K,s,r, A,B,R)
 calc_X <- function(K,m,n, A,B,R, tolerance = 0.000001){
   #Calculate the truncated m by m Generator matrix
-  G <- trunc_G(K,m,n, A,B,R)
+  G <- trunc_G(K,n,m, A,B,R)
   #transpose G to turn into a system of equations
   G_trans <- t(G)
   #Add in total probability equation

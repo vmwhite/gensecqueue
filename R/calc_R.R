@@ -32,7 +32,7 @@ calc_R <- function(A, K,n, tolerance = 0.0001){
   R_Nminusone <- matrix(0, nrow=matrix_size, ncol=matrix_size)
   #initial R_0 GUESS
   R_N <- A[1,,] %*%  temp
-
+  R <- R_N
   #update Guess
   while ( max(abs(diff(R_N - R_Nminusone))) > tolerance){
     tol <- max(abs(diff(R_N - R_Nminusone)))

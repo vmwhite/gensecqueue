@@ -28,7 +28,7 @@ Calc_B_ki <- function(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p){
   # + 1 since r indexes at 1
   matrix_size <- (K) + 1
   k_bmax <- max((K-n+2)+1,m+1)
-  i_bmax<- max( matrix_size,(m+K - n)+1, n=m+1)
+  i_bmax<- max( matrix_size,(m+K - n)+1, m+1)
   B_ki <- matrix(0, nrow=matrix_size, ncol=matrix_size)
   B <- array(c(B_ki), c(k_bmax , i_bmax , matrix_size, matrix_size))
   for (k in 1:k_bmax){

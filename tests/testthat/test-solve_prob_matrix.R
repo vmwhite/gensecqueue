@@ -21,4 +21,61 @@ test_that("Probability Matrix Solution", {
                      0.0003752345),nrow=5, ncol=1,byrow = TRUE)
 
   expect_equal(solution, X_test)
+
+  ########### second test
+  K <- 5
+  m <- 2
+  n <- 2
+  q <- .2
+  lam <- 1
+  mu_r <- 5
+  mu_g <- 7
+  p <- 1-q
+  lam_r <- lam*q
+  lam_g <- lam*p
+  matrix_size <- K +1
+  A<- calc_A_k(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
+  B<- Calc_B_ki(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
+  R <- calc_R(A,K,n)
+  G <- trunc_G(K,m,n, A,B,R)
+  G_trans <- t(G)
+  #Add in total probability equation
+  G_trans <-last_row_G(G_trans, K, R,m)
+
+  #RHS
+  matrix_size <- K + 1
+  b <- matrix(0, nrow=((m+1)*matrix_size),ncol=1)
+  b <- rbind(b,1)
+
+  # Solve over-defined system
+  expect_no_error(solve_prob_matrix(G_trans,b))
+
+  #### test
+  K <- 5
+  m <- 5
+  n <- 2
+  lam <- 1
+  mu_r <- 5
+  mu_g <- 7
+  p <-  .75
+
+  lam_r <- lam*q
+  lam_g <- lam*p
+  matrix_size <- K +1
+  A<- calc_A_k(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
+  B<- Calc_B_ki(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
+  R <- calc_R(A,K,n)
+  G <- trunc_G(K,n,m, A,B,R)
+  G_trans <- t(G)
+  #Add in total probability equation
+  G_trans <-last_row_G(G_trans, K, R,m)
+
+  #RHS
+  matrix_size <- K + 1
+  b <- matrix(0, nrow=m+1,ncol=1)
+  b <- rbind(b,1)
+
+  # Solve over-defined system
+  expect_no_error(solve_prob_matrix(G_trans,b))
+
 })
