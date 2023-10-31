@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-gensecqueue <- function(lam,n,m, p, mu_g, mu_r){
+gensecqueue <- function(lam,n,m, p, mu_g, mu_r, K=15){
   #store inputs
   metrics <- list("lambda","general servers", "restrcted servers", "p", "mu_g", "mu_r")
   results <- list(lam, n, m , p ,mu_g, mu_r)
