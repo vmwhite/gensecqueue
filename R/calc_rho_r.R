@@ -19,9 +19,9 @@ calc_rho_r <- function( K, p, n, m, p_B_R, p_B_G, mu_R, mu_G, lam_r, prob_vec){
   #probability when there is a restricted queue and all servers are busy
   p_2 <- (p_B_R *p_B_G)
     # probability R finishes before G
-    R_fin <- (n*mu_G) / (m*mu_R + n*mu_G)
+    R_fin <- (m*mu_R) / (m*mu_R + n*mu_G)
     # probability G finishes before R
-    G_fin<- (m*mu_R) / (m*mu_R + n*mu_G)
+    G_fin<- (n*mu_G) / (m*mu_R + n*mu_G)
     #summation in ith spot in queue and R finishes before ith general servers.max restricted queue length is K-n
     p_3 <- 0
     matrix_size <- K+1
