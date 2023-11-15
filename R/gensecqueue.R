@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-gensecqueue <- function(lam,n,m, p, mu_g, mu_r, K=15+n, tolerance = 0.000001){
+gensecqueue <- function(lam,n,m, p, mu_g, mu_r, N=1+n, tolerance = 0.000001){
   #store inputs
   metrics <- list("lambda","general servers", "restrcted servers", "p", "mu_g", "mu_r")
   results <- list(lam, n, m , p ,mu_g, mu_r)
@@ -26,6 +26,8 @@ gensecqueue <- function(lam,n,m, p, mu_g, mu_r, K=15+n, tolerance = 0.000001){
     ## intermediate calculations
     lam_g <- lam*(1-p)
     lam_r <- lam*p
+
+    K <- Solve_K(m,n,lam,mu_g,mu_r, p, N)
 
     ## Find Transition Probability Matrix
     A<- calc_A_k(K,m,n,lam,lam_r,lam_g,mu_r,mu_g, p)

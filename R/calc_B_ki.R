@@ -23,7 +23,7 @@
 #' lambda_p <- p * lambda
 #' mu_g <-.4
 #' mu_r <-.5
-Calc_B_ki <- function(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p){
+calc_B_ki <- function(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p){
   q <- 1 - p
   # + 1 since r indexes at 1
   matrix_size <- (K) + 1
