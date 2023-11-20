@@ -31,7 +31,7 @@ gensecqueue <- function(lam,n,m, p, mu_g, mu_r, N=1+n, tolerance = 0.000001){
 
     ## Find Transition Probability Matrix
     A<- calc_A_k(K,m,n,lam,lam_r,lam_g,mu_r,mu_g, p)
-    B<- Calc_B_ki(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
+    B<- calc_B_ki(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
     R<- calc_R(A,K,n)
     prob_vec <-calc_X(K,m,n,A,B,R, tolerance)
 

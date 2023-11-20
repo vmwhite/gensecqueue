@@ -27,7 +27,8 @@ normalize_vector <- function(vec, matrix_size, R, tolerance, time_limit= 5) {
   start_time <- Sys.time()
   while ( 1 - sum(vec, na.rm=TRUE) > tolerance && difftime(Sys.time(), start_time, units = "secs") < time_limit ) {
     new_X <- t(tail(vec,(matrix_size))) %*% R
-    if (1 - sum(vec, new_X, na.rm=TRUE) < tolerance){
+    new_X_test <- new_X %>% na.rm=TRUE
+    if ( new_X_test < tolerance){
       break
     }else{
       for (i in 1:ncol(new_X)){
