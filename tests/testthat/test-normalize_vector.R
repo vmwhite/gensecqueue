@@ -15,7 +15,7 @@ test_that("multiplication works", {
     #### validated matrices
     A <- calc_A_k(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p)
 
-    B <- Calc_B_ki(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p)
+    B <- calc_B_ki(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p)
 
     R <- calc_R(A,K,n)
 

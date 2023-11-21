@@ -4,7 +4,7 @@
 \alias{calc_rho_g}
 \title{Calculate The probability tbat a type R customer has a positive delay}
 \usage{
-calc_rho_g(K, p, X, n, m, p_B_R, p_B_G, mu_R, mu_G, lam_r, lam_g)
+calc_rho_g(K, p, n, m, p_B_R, p_B_G, mu_R, mu_G, lam_r, lam_g, prob_vec)
 }
 \arguments{
 \item{n}{:= the number of general use servers}

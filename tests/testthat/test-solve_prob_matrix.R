@@ -35,7 +35,7 @@ test_that("Probability Matrix Solution", {
   lam_g <- lam*p
   matrix_size <- K +1
   A<- calc_A_k(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
-  B<- Calc_B_ki(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
+  B<- calc_B_ki(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
   R <- calc_R(A,K,n)
   G <- trunc_G(K,m,n, A,B,R)
   G_trans <- t(G)
@@ -63,7 +63,7 @@ test_that("Probability Matrix Solution", {
   lam_g <- lam*p
   matrix_size <- K +1
   A<- calc_A_k(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
-  B<- Calc_B_ki(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
+  B<- calc_B_ki(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
   R <- calc_R(A,K,n)
   G <- trunc_G(K,n,m, A,B,R)
   G_trans <- t(G)

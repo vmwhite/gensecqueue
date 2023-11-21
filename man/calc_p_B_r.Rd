@@ -2,7 +2,7 @@
 % Please edit documentation in R/calc_p_B_r.R
 \name{calc_p_B_r}
 \alias{calc_p_B_r}
-\title{Calculate The probability tbat a type R customer has a positive delay}
+\title{Calculate the probability that a type R customer has a positive delay}
 \usage{
 calc_p_B_r(m, n, K, prob_vec)
 }
@@ -19,5 +19,5 @@ calc_p_B_r(m, n, K, prob_vec)
 p_B_r value
 }
 \description{
-Calculate The probability tbat a type R customer has a positive delay
+Calculate the probability that a type R customer has a positive delay
 }

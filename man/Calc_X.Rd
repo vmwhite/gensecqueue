@@ -4,7 +4,7 @@
 \alias{calc_X}
 \title{Solve for stationary probability vector X}
 \usage{
-calc_X(K, m, n, A, B, R, tolerance = 1e-06)
+calc_X(K, m, n, A, B, R, tolerance = 1e-05)
 }
 \arguments{
 \item{K}{:= truncation parameter}

@@ -12,7 +12,7 @@ test_that("test the probability that a type G customer has a positive delay cacl
   lam_g <- lam*p
   matrix_size <- K +1
   A<- calc_A_k(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
-  B<- Calc_B_ki(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
+  B<- calc_B_ki(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
   R <- calc_R(A,K,n)
   prob_vec <- calc_X(K,m,n,A,B,R)
 

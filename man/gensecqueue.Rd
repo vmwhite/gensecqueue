@@ -4,7 +4,7 @@
 \alias{gensecqueue}
 \title{Calculate performance metrics of a queueing system with General and Restricted Servers}
 \usage{
-gensecqueue(lam, n, m, p, mu_g, mu_r)
+gensecqueue(lam, n, m, p, mu_g, mu_r, N = 1 + n, tolerance = 1e-06)
 }
 \arguments{
 \item{lam}{:= arrival rate of all customers}

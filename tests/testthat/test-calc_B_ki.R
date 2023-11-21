@@ -98,7 +98,7 @@ test_that("Test B matrix calculations", {
                   0,0,0,0, 0,0)
                 , nrow = 6, ncol = 6, byrow = TRUE)
 
-  B <- Calc_B_ki(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p)
+  B <- calc_B_ki(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p)
 
 #Check values -- Note: R indexes at 1
   expect_equal(B[1,1,,], B_00)

@@ -35,8 +35,8 @@ lambda_aux <- (p-1) * lambda
 lambda_p <- p * lambda
 mu_p <-.4
 mu_aux <-.5
-A <- Calc_Am(K,s,r,lambda,lambda_aux,lambda_p,mu_p,mu_aux, p)
+A <- Calc_A_k(K,s,r,lambda,lambda_aux,lambda_p,mu_p,mu_aux, p)
 R <- Calc_R(A, K,s)
-B <-  Calc_Bmn(K,s,r,lambda,lambda_aux,lambda_p,mu_p,mu_aux, p)
+B <-  Calc_B_ki(K,s,r,lambda,lambda_aux,lambda_p,mu_p,mu_aux, p)
 trunc_G(K,s,r, A,B,R)
 }

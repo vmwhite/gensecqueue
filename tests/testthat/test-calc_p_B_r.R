@@ -12,7 +12,7 @@ test_that("test the probability that a type R customer has a positive delay cacl
   lam_g <- lam*p
   matrix_size <- K +1
   A<- calc_A_k(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
-  B<- Calc_B_ki(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
+  B<- calc_B_ki(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
   R <- calc_R(A,K,n)
   prob_vec <- calc_X(K,m,n,A,B,R)
 
@@ -30,7 +30,8 @@ test_that("test the probability that a type R customer has a positive delay cacl
   ex <- prob_vec[m+1,n+1]+ as.double(prob_vec[m+1,n+1+1])+ as.double(prob_vec[m+1,n+2+1])+ as.double(prob_vec[m+1,n+3+1]) +
     prob_vec[m+1+1,n+1]+ as.double(prob_vec[m+1+1,n+1+1])+ as.double(prob_vec[m+1+1,n+2+1])+ as.double(prob_vec[m+1+1,n+3+1]) +
     prob_vec[m+2+1,n+1]+ as.double(prob_vec[m+2+1,n+1+1])+ as.double(prob_vec[m+2+1,n+2+1])+ as.double(prob_vec[m+2+1,n+3+1]) +
-    prob_vec[m+3+1,n+1]+ as.double(prob_vec[m+3+1,n+1+1])+ as.double(prob_vec[m+3+1,n+2+1])+ as.double(prob_vec[m+3+1,n+3+1])
+    prob_vec[m+3+1,n+1]+ as.double(prob_vec[m+3+1,n+1+1])+ as.double(prob_vec[m+3+1,n+2+1])+ as.double(prob_vec[m+3+1,n+3+1]) +
+    prob_vec[m+4+1,n+1]+ as.double(prob_vec[m+4+1,n+1+1])+ as.double(prob_vec[m+4+1,n+2+1])+ as.double(prob_vec[m+4+1,n+3+1])
 
   ##Test 2 Value
   p_B_r <- calc_p_B_r(m,n,K,prob_vec)

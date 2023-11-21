@@ -35,18 +35,53 @@ Solve_K <- function(m,n,lambda,mu_g,mu_r, p, N) {
     A <- calc_A_k(N,m,n,lambda,lambda_r,lambda_g,mu_r,mu_g, p)
     R <- calc_R(A,N,n)
     B <- calc_B_ki(N,m,n,lambda,lambda_r,lambda_g,mu_r,mu_g, p)
-    X <- calc_X(N,m,n,A,B,R)
+    prob_vec <- calc_X(N,m,n,A,B,R)
 
     #calculate new vaules and difference
-    L_q_r <-calc_L_q_r(N,m,n,X)
-    L_q_g <- calc_L_q_g(N,n,X)
-    L_r_N_val <- abs(L_r_N_1 - L_q_r) / L_q_r
-    L_g_N_val <- abs(L_g_N_1 - L_q_g) / L_q_g
+    matrix_size <- N+1
+    size <- length(prob_vec) / matrix_size
+    #calc L_r and L_q
+    L_r <- 0
+    L_g <- 0
+    if (m+1+1 > (size)){
+      for(i in (1):(m+1)){
+        for(j in (1):(N+1)){
+          #add one to for loops since R indexes at one
+          val <- (i-1)*prob_vec[i,j]
+          L_r <-  L_r + val
+          val_j <- ((j-1))*prob_vec[i,j]
+          L_g <- L_g + val_j
+        }
+      }
+    }else{
+      for(i in (m+1+1):(size)){
+        for(j in (n+1):(N+1)){
+          #add one to for loops since R indexes at one
+          val <- ((i-1))*prob_vec[i,j]
+          L_r <-  L_r + val
+          val_j <- ((j-1))*prob_vec[i,j]
+          L_g <- L_g + val_j
+        }
+      }
+      for(i in (1):(m+1)){
+        for(j in (1):(N+1)){
+          #add one to for loops since R indexes at one
+          val <- (i-1)*prob_vec[i,j]
+          L_r <-  L_r + val
+          val_j <- ((j-1))*prob_vec[i,j]
+          L_g <- L_g + val_j
+        }
+      }
+    }
+
+    #calculate difference
+    L_r_N_val <- abs(L_r_N_1 - L_r) / L_r
+    L_g_N_val <- abs(L_g_N_1 - L_g) / L_g
 
     print(paste0("N = ", N, ", L_r_diff =", L_r_N_val, ", L_g_diff = ", L_g_N_val))
     # reset last values
-    L_g_N_1 <- L_q_r
-    L_g_N_1 <- L_q_g
+    L_r_N_1 <- L_r
+    L_g_N_1 <- L_g
   }
     K <- N
 return(K)

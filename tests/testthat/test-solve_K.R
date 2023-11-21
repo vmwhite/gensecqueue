@@ -5,7 +5,6 @@ test_that("Check_Results", {
   rho <- c(.4,.6,.8)
   p <-  c(.2,.4,.6,.8)
   lam <- 1
-  count <- 1
 
   ## Expected results
   rho_G <- c()
@@ -20,22 +19,19 @@ test_that("Check_Results", {
       mu_g <- mu_r
       for ( per in p){
         # Solve
-        expect_no_error(gensecqueue(lam,n,auto_lanes, per, mu_g, mu_r))
+        #expect_no_error(gensecqueue(lam,n,auto_lanes, per, mu_g, mu_r))
         results<- gensecqueue(lam,n,auto_lanes,per,mu_g,mu_r)
+        print(results)
 
         #check solution<
-        #        results <-round(results,4)
-        #        expect_equal(results[10], rho_K[count])
+        results <-round(results,4)
+        expect_equal(results[10], rho_K[count])
 
-        #        results <-round(results,2)
-        #        expect_equal(results[11], rho_g[count])
+        results <-round(results,2)
+        expect_equal(results[11], rho_g[count])
 
-        #        results <- round(results,0)
-        #expect_equal(results[9], K[count])
-
-
-
-        count <- count + 1
+        results <- round(results,0)
+        expect_equal(results[9], K[count])
       }
     }
 
