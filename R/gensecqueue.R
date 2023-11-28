@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-gensecqueue <- function(lam,n,m, p, mu_g, mu_r, N=1+n, tolerance = 0.01){
+gensecqueue <- function(lam,n,m, p, mu_g, mu_r, N=1+n){
   #store inputs
   metrics <- list("lambda","general servers", "restrcted servers", "p", "mu_g", "mu_r")
   results <- list(lam, n, m , p ,mu_g, mu_r)
@@ -34,7 +34,7 @@ gensecqueue <- function(lam,n,m, p, mu_g, mu_r, N=1+n, tolerance = 0.01){
     A<- calc_A_k(K,m,n,lam,lam_r,lam_g,mu_r,mu_g, p)
     B<- calc_B_ki(K,m,n,lam,lam_r, lam_g, mu_r, mu_g, p)
     R<- calc_R(A,K,n)
-    prob_vec <-calc_X(K,m,n,A,B,R, tolerance)
+    prob_vec <-calc_X(K,m,n,A,B,R)
 
     ## Length of queues
       #steady-state number of customers in the "restricted queue"

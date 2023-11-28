@@ -7,7 +7,7 @@ test_that("Check_Results", {
   lam <- 1
   mu_r <- lam / (rho*(m+n))
   mu_g <- mu_r
-  results<- solve_K(m,n,lam,mu_g,mu_r, p, N=4)
+  results<- solve_K(m,n,lam,mu_g,mu_r, p)
   ########### Testing Table 1
   m <- c(1,3,5) #automatic servers
   n <- 5 #general servers

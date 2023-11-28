@@ -14,17 +14,18 @@
 solve_prob_matrix <- function(G,b) {
   t <- try(X <- qr.solve(G,b))
   if("try-error" %in% class(t)){
-    print(paste0("error using qr.solve, using nnls for solving for probaility transition matrix instead"))
+    print(paste0("error in using qr.solve, using nnls for solving for probaility transition matrix instead"))
     X <- nnls(G, b)$x
     ### alternative option
-    #print(paste0("Using lsfit for solving for probaility transition matrix instead"))
-    #X <- lsfit(G, b)
-    #X <- X$coefficients
-    # remove first intercept coefficient
-    #X <- X[-1]
+    # print(paste0("Using lsfit for solving for probability transition matrix instead"))
+    # X <- lsfit(G, b)
+    # X <- X$coefficients
+    # # remove first intercept coefficient
+    # X <- X[-1]
   }
-  if (all(X > 0) == FALSE){
-    X <- matrix(nnls(G, b)$x)
+  if (all(X >= 0) == FALSE){
+    print(paste0("negative solution, using nnls for solving for probaility transition matrix instead"))
+    X <- nnls(G, b)$x
   }
   return(X)
 }

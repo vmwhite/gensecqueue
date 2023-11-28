@@ -22,11 +22,19 @@
 #' B <-  calc_B_ki(K,s,r,lambda,lambda_aux,lambda_p,mu_p,mu_aux, p)
 #' vec <- calc_X(K,s,r, A,B,R)
 #' normalize_vector(vec, matrix_size, R)
-normalize_vector <- function(vec, matrix_size, R, tolerance, x_i_thres ) {
+normalize_vector <- function(vec, matrix_size, R, x_i_thres ) {
   # Get the start time
+  vec <- matrix(vec)
   start_time <- Sys.time()
-  new_X <- 100
-  while ( (((1 - sum(vec, na.rm=TRUE)) > tolerance) ||  (all(new_X < x_i_thres ) == FALSE)) && all(new_X == 0) == FALSE) {
+  new_X <- tail(vec,matrix_size) # last row of entries
+  # while ( (((1 - sum(vec, na.rm=TRUE)) > tolerance) ||  (all(new_X < x_i_thres ) == FALSE)) && all(new_X == 0) == FALSE) {
+  #   new_X <- t(tail(vec,(matrix_size))) %*% R
+  #   new_X[is.nan(new_X)] <- 0
+  #   for (i in 1:ncol(new_X)){
+  #     vec <- rbind(vec, new_X[i] )
+  #   }
+  # }
+  while ((all(new_X < x_i_thres ) == FALSE) && all(new_X == 0) == FALSE) {
     new_X <- t(tail(vec,(matrix_size))) %*% R
     new_X[is.nan(new_X)] <- 0
     for (i in 1:ncol(new_X)){

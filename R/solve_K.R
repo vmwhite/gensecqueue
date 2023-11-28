@@ -20,17 +20,19 @@
 #' mu_p <-.4
 #' mu_aux <-.5
 #' K <- Solve_K(s,r,lambda,lambda_aux,lambda_p,mu_p,mu_aux, p, N = s+1)
-solve_K <- function(m,n,lambda,mu_g,mu_r, p, N) {
+solve_K <- function(m,n,lambda,mu_g,mu_r, p, N=m) {
   lambda_r <- lambda*p
   lambda_g <- lambda*(1-p)
-  N <- max(m, N) # K > m+1, starting N will be m+1 if m is max
+  N <- max(m, n) # K > m+1, starting N will be m+1 if m is max
+  # initalizing
+  N_r <- 100
+  N_g <- 100
   L_r_N_val <- 1
   L_g_N_val <- 1
   L_r_N_1 <- .0001
   L_g_N_1 <-.0001
 
-  #maybe seperate out???
-  while ( L_r_N_val > 0.02 || L_g_N_val> 0.02  ){
+  while ( (L_r_N_val > 0.02 || L_g_N_val> 0.02) && N < 14 ){
     N <- N + 1
     # caclulate input parameters
     A <- calc_A_k(N,m,n,lambda,lambda_r,lambda_g,mu_r,mu_g, p)
@@ -41,49 +43,39 @@ solve_K <- function(m,n,lambda,mu_g,mu_r, p, N) {
     #calculate new vaules and difference
     matrix_size <- N+1
     size <- length(prob_vec) / matrix_size
-    #calc L_r and L_q
-    L_r <- 0
-    L_g <- 0
-    if (m+1+1 >= (size)){
-      for(i in (1):(m+1)){
-        for(j in (1):(N+1)){
-          #add one to for loops since R indexes at one
-          val <- (i-1)*prob_vec[i,j]
-          L_r <-  L_r + val
-          val_j <- ((j-1))*prob_vec[i,j]
-          L_g <- L_g + val_j
-        }
-      }
+
+    #calc p_K
+    p_K <- calc_p_K(m,n,prob_vec,size,N)
+
+    #calc L_r
+    if (L_r_N_val <= 0.02){
+      N_r <- min(N-1,N_r)
+      L_r <- L_r_N_1
     }else{
-      for(i in (m+1+1):(size)){
-        for(j in (n+1):(N+1)){
-          #add one to for loops since R indexes at one
-          val <- ((i-1))*prob_vec[i,j]
-          L_r <-  L_r + val
-          val_j <- ((j-1))*prob_vec[i,j]
-          L_g <- L_g + val_j
-        }
-      }
-      for(i in (1):(m+1)){
-        for(j in (1):(N+1)){
-          #add one to for loops since R indexes at one
-          val <- (i-1)*prob_vec[i,j]
-          L_r <-  L_r + val
-          val_j <- ((j-1))*prob_vec[i,j]
-          L_g <- L_g + val_j
-        }
-      }
+      L_r <- calc_L_r(m,n,prob_vec,size,N)
+    }
+
+    #calc L_g
+    if (L_g_N_val <= 0.02){
+      N_g <- min(N-1,N_g)
+      L_g <- L_g_N_1
+    }else{
+      L_g <- calc_L_g(m,n,prob_vec,size,N)
     }
 
     #calculate difference
     L_r_N_val <- abs(L_r_N_1 - L_r) / L_r
     L_g_N_val <- abs(L_g_N_1 - L_g) / L_g
+    #print(prob_vec)
+    print(paste0("N = ", N," , sum prob_vec = ", round(sum(prob_vec),2)," , p_K = ", round(p_K,4), ", L_r_diff = ", round(L_r_N_val,2), ", L_g_diff = ", round(L_g_N_val,2), " , L_r = ", round(L_r,2) , "  at K = ", min(N,N_r), " L_g = ", round(L_g,2)
+                 , "  at K = ", min(N,N_g) ))
 
-    print(paste0("N = ", N, ", L_r_diff = ", L_r_N_val, ", L_g_diff = ", L_g_N_val))
     # reset last values
     L_r_N_1 <- L_r
     L_g_N_1 <- L_g
   }
+
+
     K <- N
 return(K)
 }

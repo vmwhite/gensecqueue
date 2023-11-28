@@ -23,17 +23,5 @@ test_that("check L_q_r calculation", {
   ## Test 1
   expect_equal(ex1, L_q_r )
 
-  ##Example 2 value
-  prob_vec <- calc_X(K,m,n,A,B,R, 1e-5,  1e-10)
-  ex2 <- prob_vec[m+1+1,n+1]*(m+1-m) + prob_vec[m+1+1,n+1+1]*(m+1-m) + prob_vec[m+1+1,n+2+1]*(m+1-m) + prob_vec[m+1+1,n+3+1]*(m+1-m) +
-    prob_vec[m+2+1,n+1]*(m+2-m) + prob_vec[m+2+1,n+1+1]*(m+2-m) + prob_vec[m+2+1,n+2+1]*(m+2-m) + prob_vec[m+2+1,n+3+1]*(m+2-m) +
-    prob_vec[m+3+1,n+1]*(m+3-m) + prob_vec[m+3+1,n+1+1]*(m+3-m) + prob_vec[m+3+1,n+2+1]*(m+3-m) + prob_vec[m+3+1,n+3+1]*(m+3-m) +
-    prob_vec[m+4+1,n+1]*(m+4-m) + prob_vec[m+4+1,n+1+1]*(m+4-m) + prob_vec[m+4+1,n+2+1]*(m+4-m) + prob_vec[m+4+1,n+3+1]*(m+4-m)
-    # first sum is i = 3 to inf, add one to all due to indexing
-    #second sum is 2 to 5,  add one to all due to indexing
-  ##Test 2 Value
-  L_q_r <- calc_L_q_r(K,m,n,prob_vec)
-  ## Test 1
-  expect_equal(ex2, L_q_r )
 
 })
