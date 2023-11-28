@@ -6,12 +6,13 @@
 #' @param p := the probability a customer requires restricted service
 #' @param mu_g := the service rate of general servers
 #' @param mu_r := the service rate of restricted servers
+#' @param tolerance := tolerance of the sum of the probability matrix, default is 1% unaccounted for.
 #'
 #' @return data frame of key performance metrics
 #' @export
 #'
 #' @examples
-gensecqueue <- function(lam,n,m, p, mu_g, mu_r, N=1+n, tolerance = 0.000001){
+gensecqueue <- function(lam,n,m, p, mu_g, mu_r, N=1+n, tolerance = 0.01){
   #store inputs
   metrics <- list("lambda","general servers", "restrcted servers", "p", "mu_g", "mu_r")
   results <- list(lam, n, m , p ,mu_g, mu_r)

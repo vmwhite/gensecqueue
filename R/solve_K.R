@@ -23,12 +23,13 @@
 solve_K <- function(m,n,lambda,mu_g,mu_r, p, N) {
   lambda_r <- lambda*p
   lambda_g <- lambda*(1-p)
-  N <- max(m+1, N) # K > s
+  N <- max(m, N) # K > m+1, starting N will be m+1 if m is max
   L_r_N_val <- 1
   L_g_N_val <- 1
   L_r_N_1 <- .0001
   L_g_N_1 <-.0001
 
+  #maybe seperate out???
   while ( L_r_N_val > 0.02 || L_g_N_val> 0.02  ){
     N <- N + 1
     # caclulate input parameters

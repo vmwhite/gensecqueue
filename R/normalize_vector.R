@@ -26,7 +26,7 @@ normalize_vector <- function(vec, matrix_size, R, tolerance, x_i_thres ) {
   # Get the start time
   start_time <- Sys.time()
   new_X <- 100
-  while ( ((1 - sum(vec, na.rm=TRUE)) > tolerance) ||  (all(new_X < x_i_thres ) == FALSE)) {
+  while ( (((1 - sum(vec, na.rm=TRUE)) > tolerance) ||  (all(new_X < x_i_thres ) == FALSE)) && all(new_X == 0) == FALSE) {
     new_X <- t(tail(vec,(matrix_size))) %*% R
     new_X[is.nan(new_X)] <- 0
     for (i in 1:ncol(new_X)){
