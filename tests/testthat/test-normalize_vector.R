@@ -1,4 +1,4 @@
-test_that("multiplication works", {
+test_that("calculating X_{i+1} = X_i%*% R works", {
     ## test params
     K <- 5
     m <- 2
@@ -40,7 +40,7 @@ test_that("multiplication works", {
     }
 
     # test function
-    X_test <- normalize_vector(vec,matrix_size,R, 0.00000000000001)
+    X_test <- normalize_vector(vec,matrix_size,R, 1e-13, 10e-5)
     X_test <- reformat_X(X_test,matrix_size)
     X_test_sub <- tail(X_test, n= 5)
     colnames(X_test_sub) <- NULL

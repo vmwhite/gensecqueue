@@ -4,7 +4,7 @@
 \alias{normalize_vector}
 \title{Calculate additional stationary transition probabilities above boundary behavior}
 \usage{
-normalize_vector(vec, matrix_size, R, tolerance, time_limit = 5)
+normalize_vector(vec, matrix_size, R, tolerance, x_i_thres)
 }
 \arguments{
 \item{vec}{<- vector of X_i to add transition probabilities to}

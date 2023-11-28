@@ -20,10 +20,10 @@
 #' mu_p <-.4
 #' mu_aux <-.5
 #' K <- Solve_K(s,r,lambda,lambda_aux,lambda_p,mu_p,mu_aux, p, N = s+1)
-Solve_K <- function(m,n,lambda,mu_g,mu_r, p, N) {
+solve_K <- function(m,n,lambda,mu_g,mu_r, p, N) {
   lambda_r <- lambda*p
   lambda_g <- lambda*(1-p)
-  N <- max(m+1, 11, N) # K > s
+  N <- max(m+1, N) # K > s
   L_r_N_val <- 1
   L_g_N_val <- 1
   L_r_N_1 <- .0001
@@ -43,7 +43,7 @@ Solve_K <- function(m,n,lambda,mu_g,mu_r, p, N) {
     #calc L_r and L_q
     L_r <- 0
     L_g <- 0
-    if (m+1+1 > (size)){
+    if (m+1+1 >= (size)){
       for(i in (1):(m+1)){
         for(j in (1):(N+1)){
           #add one to for loops since R indexes at one
@@ -78,7 +78,7 @@ Solve_K <- function(m,n,lambda,mu_g,mu_r, p, N) {
     L_r_N_val <- abs(L_r_N_1 - L_r) / L_r
     L_g_N_val <- abs(L_g_N_1 - L_g) / L_g
 
-    print(paste0("N = ", N, ", L_r_diff =", L_r_N_val, ", L_g_diff = ", L_g_N_val))
+    print(paste0("N = ", N, ", L_r_diff = ", L_r_N_val, ", L_g_diff = ", L_g_N_val))
     # reset last values
     L_r_N_1 <- L_r
     L_g_N_1 <- L_g

@@ -21,6 +21,7 @@
 #' matrix_power(A, n)
 matrix_power <- function(A, n) {
   count = 0
+  A_power <- A
   while(count <= n){
     if (count == 0){
       A_power <- diag(nrow(A))

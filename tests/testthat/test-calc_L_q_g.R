@@ -17,14 +17,15 @@ test_that("caclulation of Lqg works", {
   prob_vec <- calc_X(K,m,n,A,B,R)
 
   ##Example 1 value
-  ex <- (prob_vec[0+1,n+1+1]*(n+1-n)) + (prob_vec[0+1,n+2+1]*(n+2-n)) + (prob_vec[0+1,n+3+1]*(n+3-n)) +
+  ex1 <- (prob_vec[0+1,n+1+1]*(n+1-n)) + (prob_vec[0+1,n+2+1]*(n+2-n)) + (prob_vec[0+1,n+3+1]*(n+3-n)) +
     prob_vec[1+1,n+1+1]*(n+1-n) + prob_vec[1+1,n+2+1]*(n+2-n) + prob_vec[1+1,n+3+1]*(n+3-n) +
-    prob_vec[2+1,n+1+1]*(n+1-n) + prob_vec[2+1,n+2+1]*(n+2-n) + prob_vec[2+1,n+3+1]*(n+3-n)
+    prob_vec[2+1,n+1+1]*(n+1-n) + prob_vec[2+1,n+2+1]*(n+2-n) + prob_vec[2+1,n+3+1]*(n+3-n) +
+    prob_vec[3+1,n+1+1]*(n+1-n) + prob_vec[3+1,n+2+1]*(n+2-n) + prob_vec[3+1,n+3+1]*(n+3-n)
 
   ##Test 1 Value
   L_q_g <- calc_L_q_g(K,n,prob_vec)
 
   ## Test 1
-  expect_equal(ex, L_q_g )
+  expect_equal(ex1, L_q_g )
 
 })

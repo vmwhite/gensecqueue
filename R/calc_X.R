@@ -37,6 +37,7 @@ calc_X <- function(K,m,n, A,B,R, tolerance = 0.00001, x_i_thres = 0.00001){
   b <- matrix(0, nrow=((m+1)*matrix_size),ncol=1)
   b <- rbind(b,1)
 
+
   # Solve over-defined system
   X <- solve_prob_matrix(G_trans,b)
 
