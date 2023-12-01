@@ -66,7 +66,7 @@ trunc_G <- function(K,n,m, A,B,R) {
       ### Z summation - As written in text ####
     }else if (col == ((m+1) +1)){
       i <- 1
-      r_row_sum <- 0 # A[(0)+1,,]
+      r_row_sum <- 0 # A_1 == A[(1)+1,,]
       while (i <= (K-n+2)){
         r_row_sum <- r_row_sum + (matrix_power(R,i-1) %*% A[(i)+1,,])
         i <- i +1
