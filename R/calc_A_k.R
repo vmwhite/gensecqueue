@@ -68,7 +68,7 @@ calc_A_k <- function(K,m,n,lam,lam_R,lam_G,mu_R,mu_G, p){
               }
             }
             ### AND Restricted queue AND General queue#####
-          }else if( (i-1)>m && (j-1)>n ){
+          }else if( ((i-1)>m) && ((j-1)>n) ){
             ## transition from state  (i,j) to (i,j-1)
             if ( ii_two == i){
               A[k,j,j-1] = n*mu_G

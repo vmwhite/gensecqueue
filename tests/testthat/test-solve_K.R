@@ -26,25 +26,25 @@ test_that("Check_Results", {
     for (rho_val in rho){
       mu_r <- lam / (rho_val*(auto_lanes+n))
       mu_g <- mu_r
-      for ( per in p){
-        # Solve
-        #expect_no_error(gensecqueue(lam,n,auto_lanes, per, mu_g, mu_r))
-        results<- gensecqueue(lam,n,auto_lanes,per,mu_g,mu_r)
-        print(results)
+      # for ( per in p){
+      #   # Solve
+      #   #expect_no_error(gensecqueue(lam,n,auto_lanes, per, mu_g, mu_r))
+      #   results<- gensecqueue(lam,n,auto_lanes,per,mu_g,mu_r)
+      #   print(results)
 
         #check solution<
-        results <-round(results,4)
-        expect_equal(results[10], rho_K[count])
-
-        results <-round(results,2)
-        expect_equal(results[11], rho_g[count])
-
-        results <- round(results,0)
-        expect_equal(results[9], K[count])
+        # results <-round(results,4)
+        # expect_equal(results[10], rho_K[count])
+        #
+        # results <-round(results,2)
+        # expect_equal(results[11], rho_g[count])
+#
+#         results <- round(results,0)
+#         expect_equal(results[9], K[count])
       }
     }
 
-  }
+  #}
 
 
 

@@ -22,7 +22,7 @@
 #' B <-  calc_B_ki(K,s,r,lambda,lambda_aux,lambda_p,mu_p,mu_aux, p)
 #' vec <- calc_X(K,s,r, A,B,R)
 #' normalize_vector(vec, matrix_size, R)
-normalize_vector <- function(vec, matrix_size, R, x_i_thres ) {
+normalize_vector <- function(vec, matrix_size, R, x_i_thres = 10e-5) {
   # Get the start time
   vec <- matrix(vec)
   start_time <- Sys.time()
